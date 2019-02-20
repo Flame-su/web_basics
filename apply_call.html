@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  function add(a,b){
+  return a+b;  
+}
+function sub(a,b){
+  return a-b;  
+}
+
+var a1 = add.apply(sub,[4,2]);　　//sub调用add的方法
+var a2 = sub.apply(add,[4,2]);
+console.log(a1);  //6     
+console.log(a2);  //2
+console.log('-------------------------')
+function mul(a,b){
+    return this+(a*b);
+}
+console.log(mul.call(this,2,4))
+console.log(mul.call(null,2,3));
+console.log(mul.call('s',2,3));
+console.log(mul.call(3,2,3));
+console.log(mul.apply(null,[2,5]));
+console.log(mul.apply(2,[2,5]));
+
+
+/*call的用法*/
+var a1 = add.call(sub,4,2);
+console.log('-------------------------')
+
+function Person(name,age) {
+    console.log(this)
+    this.name=name;
+    this.age=age;
+}
+var Student=function(name,age,gender) {
+    console.log(this)
+    Person.call(this,name,age);//this继承了person的属性和方法
+    this.gender=gender;
+}
+var student=new Student("陈安东", 20, "男");
+console.log("姓名:"+student.name+"\n"+"年龄:"+student.age+"\n"+"性别:"+student.gender);
+</script>
