@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文字滚动</title>
+
+  <style type="text/css">
+    .box {
+      overflow: hidden;
+      width: 7em;
+    }
+    .box  ul {
+      width: 800%;
+      float: left;
+      height: 30px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      zoom: 1;
+    }
+
+    .box  ul li {
+      float: left;
+      padding: 0;
+      line-height: 30px;
+      padding-right: 2em;
+      list-style: none;
+    }
+
+  </style>
+  <div id="box" class="box">
+        <ul>
+          <li id="demo1">你瞅啥，你过来啊</li>
+          <li id="demo2"></li>
+        </ul>
+  </div>
+  <script type="text/javascript">
+    var box = document.getElementById("box");
+    var demo1 = document.getElementById("demo1");
+    var demo2 = document.getElementById("demo2");
+    demo2.innerHTML = document.getElementById("demo1").innerHTML;
+    function Marquee() {
+      console.log(box.scrollLeft , demo2.offsetWidth)
+      if (box.scrollLeft - demo2.offsetWidth >= 0) {
+        box.scrollLeft -= demo1.offsetWidth;
+      }
+      else {
+        box.scrollLeft++;
+      }
+    }
+    var myvar = setInterval(Marquee, 30);
+    //小于不滚动
+    if(demo1.offsetWidth<=box.offsetWidth){
+      clearInterval(myvar)
+    }
+  </script>
+
+</head>
