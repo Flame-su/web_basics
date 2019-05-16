@@ -9,51 +9,50 @@
 
   <style type="text/css">
     .box {
-      overflow: hidden;
       width: 7em;
-    }
-    .box  ul {
-      width: 800%;
-      float: left;
-      height: 30px;
-      margin: 0;
+      margin: 0 auto;
       padding: 0;
       overflow: hidden;
       zoom: 1;
     }
 
-    .box  ul li {
+    .item {
+      width: 800%;
       float: left;
       padding: 0;
       line-height: 30px;
-      padding-right: 2em;
+      overflow: hidden;
       list-style: none;
     }
 
+    span {
+      padding-right: 2em;
+      font-style: normal;
+    }
   </style>
   <div id="box" class="box">
-        <ul>
-          <li id="demo1">你瞅啥，你过来啊</li>
-          <li id="demo2"></li>
-        </ul>
+    <div class="item">
+      <span id="demo1">你瞅啥，你过来啊</span>
+      <span id="demo2"></span>
+    </div>
   </div>
   <script type="text/javascript">
-    var box = document.getElementById("box");
+    var item = document.getElementById('box')
     var demo1 = document.getElementById("demo1");
     var demo2 = document.getElementById("demo2");
     demo2.innerHTML = document.getElementById("demo1").innerHTML;
     function Marquee() {
-      console.log(box.scrollLeft , demo2.offsetWidth)
-      if (box.scrollLeft - demo2.offsetWidth >= 0) {
-        box.scrollLeft -= demo1.offsetWidth;
+      if (item.scrollLeft - demo2.offsetWidth >= 0) {
+        item.scrollLeft -= demo1.offsetWidth;
       }
       else {
-        box.scrollLeft++;
+        item.scrollLeft++
       }
     }
     var myvar = setInterval(Marquee, 30);
+
     //小于不滚动
-    if(demo1.offsetWidth<=box.offsetWidth){
+    if (demo1.offsetWidth <= box.offsetWidth) {
       clearInterval(myvar)
     }
   </script>
