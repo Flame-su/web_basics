@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>prototype</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  var maxProfit = function(prices) {
+    var arr= [1,2,3,4,5,9]
+    arr.map(a=>console.log(a))
+};
+maxProfit()
+  function Person(name) {
+    this.name = name;
+    // console.log(name)
+  }
+  Person.prototype.one=[]
+  Person.prototype.printName = function () {
+    console.log(this);
+  }
+
+  var person1 = new Person('Byron');
+  person1.one.push(1)
+  var person2 = new Person('Frank');
+  person1.one.push(2)
+  console.log(person1.one)
+</script>

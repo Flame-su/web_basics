@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  var arr = [1,23,4,5,[5,2,1,5],[12,5,2,[2,1,55,231,22],1],42,5]
+  i=Array.from( new Set((arr+'').split(','))).map((a)=>+a).sort((a,b)=>a-b)
+</script>
