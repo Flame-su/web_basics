@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input{
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <input type="number" id="input1" >
+  <select name="" id="select">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+  <input type="number" id="input2">
+</body>
+</html>
+<script>
+  var input1= document.getElementById("input1")
+  var input2= document.getElementById("input2")
+  var select= document.getElementById("select")
+  var option=document.getElementsByTagName('option')
+  input1.onblur=function(){
+    console.log(input1.value)
+  }
+  input2.onblur=function(){
+    console.log(input1.value)
+  }
+  select.onblur=function(){
+    console.log(option[select.selectedIndex].value)
+  }
+</script>

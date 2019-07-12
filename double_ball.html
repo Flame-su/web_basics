@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+       body,ul,li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .box {
+        height: 600px;
+        background: rgba(216, 205, 205, 1);
+    }
+    .content {
+        height: 70%;
+        padding-top: 100px;
+        text-align: center;
+    }
+    .context {
+        margin: 20px 0;
+    }
+    .context span {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        border-radius: 50%;
+        color: #fff;
+        background: rgba(192, 42, 42, 1);
+        margin-right: 15px;
+    }
+    .context span:nth-child(5) {
+        margin-right: 30px;
+    }
+    .context span:nth-child(7) {
+        margin-right: 0;
+    }
+    .context span:nth-child(6),.context span:nth-child(7) {
+        background: rgba(47, 40, 153, 1);
+    }
+    .button {
+        width: 100%;
+    }
+    .button input {
+        width: 180px;
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        margin: 0 auto;
+        background: rgba(192, 42, 42, 1);
+        color: #fff;
+        font: normal 400 14px '微软雅黑';
+        border-radius: 5px;
+        outline: none;
+    }
+  </style>
+</head>
+<body>
+    <div class="box">
+        <div class="content">
+            <h3>客官, 来两注?</h3>
+        </div>
+        <div class="button">
+            <input type="button" value="随机五注" onclick="fiveNumStr()">
+        </div>
+    </div>
+</body>
+</html>
+<script>
+   // 定义 randomNumber方法, 随机输出数组
+   function randomNumber(num) {
+        // 定义 strArr方法, 生成数组
+        function strArr(num) {
+            var numberAarry = []
+            for (var i = 0; i < num; i++) {
+                numberAarry[i] = i + 1
+            }
+            return numberAarry
+        }
+        // 获得数组
+        var numberAarry = strArr(num)
+        // 将数组元素随机排序
+        numberAarry.sort(function () {
+            return 0.5 - Math.random()
+        })
+        // 小于10，前面加0
+        for (var i = 0; i < numberAarry.length; i++) {
+            if (numberAarry[i] < 10) {
+                numberAarry[i] = '0' + numberAarry[i]
+            } else {
+                numberAarry[i] = String(numberAarry[i])
+            }
+        }
+        return numberAarry
+    }
+    console.log(randomNumber(35))
+     // 用 fiveIsClick 限制用户频繁点击按钮
+     var fiveIsClick = true
+    function fiveNumStr() {
+        if (fiveIsClick) {
+        	// 设为false, 不可再次点击
+            fiveIsClick = false
+            var content = document.getElementsByClassName('content')[0]
+            var innerText = content.getElementsByClassName('context')
+            var ulNode = content.getElementsByTagName('ul')[0]
+            // 先删除已创建的ul及其字节点, 再新增
+            // 为什么要删除再添加节点呢, 是因为不增删节点只改变数字虽然渲染更快, 但是区别太小, 失去了动态效果
+            // 当然, 如果你不需要删除再添加节点也行, 以下代码稍改动一下就好了
+            if (ulNode) {
+                content.removeChild(ulNode)
+            }
+            var ul = document.createElement('ul')
+            // 用ul节点长度判断是否存在ul
+            var ulLength = content.getElementsByTagName('ul').length
+            var index = 0 
+            // 计时器，每隔0.5秒新增一组
+            var interval = setInterval(function() {
+                index ++
+                if (ulLength < 1) {
+                    var li = document.createElement('li')
+                    li.setAttribute('class','context')
+                    ul.appendChild(li)
+                    content.appendChild(ul)
+                    // 遍历li节点
+                    var context = document.getElementsByClassName('context')[index - 1]
+                    // 得到顺序被打乱的前区35个数字数组
+                    var randomLeft = randomNumber(35)
+                    // 大乐透前区数组
+                    var leftNum = [randomLeft[0], randomLeft[1], randomLeft[2], randomLeft[3], randomLeft[4]]
+                    // 从小到大排序
+                    leftNum.sort(function (a, b) {
+                        return a - b
+                    })
+                    // 得到顺序被打乱的后区12个数字数组
+                    var randomRight = randomNumber(12)
+                    // 大乐透后区数组
+                    var rightNum = [randomRight[0], randomRight[1]]
+                    rightNum.sort(function (a, b) {
+                        return a - b // 从小到大排序
+                    })
+                    // 节点模版，用于给每个球添加样式
+                    var spanNode = "<span>" + leftNum[0] + "</span>" + "<span>" + leftNum[1] + "</span>" + "<span>" + leftNum[2] + "</span>"
+                        + "<span>" + leftNum[3] + "</span>" + "<span>" + leftNum[4] + "</span>" + "<span>" + rightNum[0] + "</span>" + "<span>" + rightNum[1] + "</span>"
+                    // 节点已添加，再添加spanNode节点模版
+                    context.innerHTML = spanNode
+                    // li节点数量达到5个，就停止计时器
+                    if (index >= 5) {
+                        clearInterval(interval)
+                    }
+                }
+            }, 500)
+            // 阻止按钮重复点击，间隔3秒
+            setTimeout(function() {  
+                fiveIsClick = true
+            }, 3000)
+        }
+    }
+</script>

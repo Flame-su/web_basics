@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .boxs{
+      width: 100px;
+      height: 100px;
+      overflow-x: scroll;
+      overflow-y: scroll
+    }
+    p{
+      width: 200%;
+    }
+  </style>
+</head>
+<body>
+  <div class="boxs" id="boxs">
+    <p id='p'>一般来说根据我的测试情况，监听滚动基本上监听的都是整体document或者window。
+
+        监听的都是相对于整体（document或者window）的当前可见区域的文档片段（就是你眼睛可以看到的部分），而不是去监
+        
+        听单个的DOM片段，因为这么做没有意义。在vue中也监听不了！因为vue的每个文件实际上都是一块DOM片段，你在自己
+        
+        的身上监听自己的滑动情况。这就好比（你想揪着自己的头发，把自己提起来）！</p>
+  </div>
+</body>
+</html>
+<script>
+  var boxs= document.getElementById('boxs')
+  var p =document.getElementById('p')
+  setTimeout(()=>{
+    boxs.scrollTop=100
+    boxs.scrollLeft=100
+  },2000)
+</script>
