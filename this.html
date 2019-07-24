@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // var m = '上';
+  // var foo = {
+  //   m: '下',
+  //   b:function() {
+  //     console.log(this, 1)
+  //     return function () {
+  //       console.log(this, 2)
+  //     }
+  //   }
+  // }
+  // // foo.b();
+  // foo.b()();
+
+  // console.log(bar);
+  // bar()
+  // function bar () {
+  //   console.log(1);
+  // }
+
+  var m = 100
+  function fn(){
+    console.log(m) //var 私有变量，变量提升 没有var话提升全局
+    var m = 200
+    console.log(m)
+    //相当于
+    // var m
+    // console.log(m) undefined
+    // m=200
+    // console.log(m) 200
+  }
+  fn()
+  console.log(m)
+</script>
