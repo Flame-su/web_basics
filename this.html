@@ -14,17 +14,17 @@
 
 </html>
 <script>
-  // var m = '上';
-  // var foo = {
-  //   m: '下',
-  //   b:function() {
-  //     console.log(this, 1)
-  //     return function () {
-  //       console.log(this, 2)
-  //     }
-  //   }
-  // }
-  // // foo.b();
+  var m = '上';
+  var foo = {
+    m: '下',
+    b:function() {
+      console.log(this, 1)
+      // return function () {
+      //   console.log(this, 2)
+      // }
+    }
+  }
+  foo.b();
   // foo.b()();
 
   // console.log(bar);
@@ -33,17 +33,33 @@
   //   console.log(1);
   // }
 
-  var m = 100
-  function fn(){
-    console.log(m) //var 私有变量，变量提升 没有var话提升全局
-    var m = 200
-    console.log(m)
-    //相当于
-    // var m
-    // console.log(m) undefined
-    // m=200
-    // console.log(m) 200
+  // var m = 100
+  // function fn(){
+  //   console.log(m) //var 私有变量，变量提升 没有var话提升全局
+  //   var m = 200
+  //   console.log(m)
+  //   //相当于
+  //   // var m
+  //   // console.log(m) undefined
+  //   // m=200
+  //   // console.log(m) 200
+  // }
+  // fn()
+  // console.log(m)
+
+  // function fn1(){
+  //   console.log(this)
+  // }
+  // fn1()
+  
+  //把函数赋值之后再调用
+  var a = 1
+  var obj1 = {
+      a:2,
+      fn:function(){
+          console.log(this.a)
+      }
   }
-  fn()
-  console.log(m)
+  var fn1 = obj1.fn
+  fn1()//1
 </script>
