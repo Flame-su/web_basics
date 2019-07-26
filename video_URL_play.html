@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>视频</title>
+    <style>
+        body,
+        ul,
+        li,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        img,
+        br,
+        hr,
+        table,
+        tr,
+        td,
+        dl,
+        dt,
+        dd,
+        form {
+            margin: 0;
+            padding: 0;
+            /* color: #fff */
+        }
+
+        body {
+            font-family: Arial, "微软雅黑";
+            color: #222222
+        }
+
+        .clear {
+            clear: both
+        }
+
+        ul,
+        li {
+            list-style: none;
+            margin-bottom: 20px
+        }
+
+        img {
+            border: none
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        body,
+        html {
+            width: 100%;
+        }
+
+        i {
+            margin-left: 10px;
+            font-style: normal;
+            color: red;
+            cursor: pointer;
+        }
+
+        b {
+            padding: 0 10px
+        }
+
+        .boxs {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            /* text-align: center; */
+            padding:10px 50px ;
+            /* padding-top: none; */
+            box-sizing: border-box
+        }
+        .video-box{
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        video{
+            margin-bottom: 30px;
+        }
+        .btn-boxs{
+            text-align: center
+        }
+        .sure{
+            color: #fff
+        }
+        .sure text{
+            display: block;
+            height: 40px;
+        }
+        .sure b{
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boxs">
+        <div class="video-box">
+            <video id="video" width="400" height="300" autoplay loop="loop" controls>
+
+            </video>
+            <br/> 视频地址：
+            <input type="text" id="videoUrl" />
+            <input type="button" id="playButton" onClick="playOrPauseVideo()" value="播放" />
+            <span id="time"></span>
+        </div>
+        <div class="record">
+            <ul class="btn-boxs">
+                <li class="t-video">
+                    <input type="button" class="bug" value="老师视频卡了" />
+                    <input type="button" class="ok" value="老师视频好了" disabled="disabled" />
+                </li>
+                <li class="t-audio">
+                    <input type="button" class="bug" value="老师音频卡了" />
+                    <input type="button" class="ok" value="老师音频好了" disabled/>
+                </li>
+                <li class="s-video">
+                    <input type="button" class="bug" value="学生视频卡了" />
+                    <input type="button" class="ok" value="学生视频好了" disabled/>
+                </li>
+                <li class="s-audio">
+                    <input type="button" class="bug" value="学生音频卡了" />
+                    <input type="button" class="ok" value="学生音频好了" disabled/>
+                </li>
+            </ul>
+            <div class="sure" id="del">
+                <p>老师视频卡了(秒):
+                    <text class="t-video-node"></text>
+                </p>
+                <p>老师音频卡了(秒):
+                    <text class="t-audio-node"></text>
+                </p>
+                <p>学生视频卡了(秒):
+                    <text class="s-video-node"></text>
+                </p>
+                <p>学生音频卡了(秒):
+                    <text class="s-audio-node"></text>
+                </p>
+            </div>
+            <button class="submit">提交</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+<script type="text/javascript">
+    let sid = ''
+    //视频播放
+    function playOrPauseVideo() {
+        let videoUrl = $("#videoUrl").val();
+        str = videoUrl.split("com/")[1]
+        str1 = str.split("/")[1]
+        str2 = str1.split("_")[0]
+        console.log(str2)
+        sid = str2
+        let video = $("#video")[0];
+        //使用事件监听方式捕捉事件
+        video.addEventListener("timeupdate", function () {
+            let timeDisplay = $("#time");
+            //用秒数来显示当前播放进度
+            let sum = Math.floor(video.currentTime) + "/" + Math.floor(video.duration) + " 秒";
+            timeDisplay.text(sum)
+        }, false);
+        if (video.paused) {
+            if (videoUrl != video.src) {
+                video.src = videoUrl;
+                video.load();
+            } else {
+                video.play();
+            }
+            $("#playButton").val("暂停")
+        } else {
+            video.pause();
+            $("#playButton").val("播放")
+        }
+    }
+    let t_video = []
+    let t_audio = []
+    let s_video = []
+    let s_audio = []
+
+    let start_time = ''
+    let end_time = ''
+    //储存数据
+    $("ul").on("click", "input", function () {
+        let video = $("#video")[0];
+        let time = Math.floor(video.currentTime)
+        let parentName = $(this).parent().attr('class')
+        // console.log(parentName)
+        let name = $(this).attr('class')
+        // console.log(name)
+        if (parentName == "t-video") {
+            if (name == 'bug') {
+                start_time = time
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled");
+            } else {
+                end_time = time
+                t_video.push({ "st": start_time, "et": time })
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled")
+                $(".t-video-node").append(`<b>${start_time}~${end_time}<i>x</i></b>`)
+                console.log(t_video)
+            }
+        }
+        if (parentName == "t-audio") {
+            if (name == 'bug') {
+                start_time = time
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled");
+            } else {
+                end_time = time
+                t_audio.push({ "st": start_time, "et": time })
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled")
+                $(".t-audio-node").append(`<b>${start_time}~${end_time}<i>x</i></b>`)
+            }
+        }
+        if (parentName == "s-video") {
+            if (name == 'bug') {
+                start_time = time
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled");
+            } else {
+
+                end_time = time
+                s_video.push({ "st": start_time, "et": time })
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled")
+                $(".s-video-node").append(`<b>${start_time}~${end_time}<i>x</i></b>`)
+            }
+        }
+        if (parentName == "s-audio") {
+            if (name == 'bug') {
+                start_time = time
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled");
+            } else {
+
+                end_time = time
+                s_audio.push({ "st": start_time, "et": time })
+                $(this).attr("disabled", "true").siblings().removeAttr("disabled")
+                $(".s-audio-node").append(`<b>${start_time}~${end_time}<i>x</i></b>`)
+            }
+        }
+
+        // console.log(t_video,"------")
+    })
+    $("#del").on("click", "i", function () {
+        let parentName = $(this).parent().parent().attr('class')
+        let index = $(this).parent().index()
+        if (parentName == 't-video-node') {
+            t_video.splice(index, 1)
+            $(this).parent().remove();
+        }
+        if (parentName == 't-audio-node') {
+            t_audio.splice(index, 1)
+            $(this).parent().remove();
+        }
+        if (parentName == 's-video-node') {
+            s_video.splice(index, 1)
+            $(this).parent().remove();
+        }
+        if (parentName == 's-audio-node') {
+            s_audio.splice(index, 1)
+            $(this).parent().remove();
+        }
+    })
+    //提交
+    $(".submit").click(function () {
+        console.log(s_video, "------", sid)
+        let data = {}
+        let s = {}
+        let t = {}
+        s["video"] = s_video
+        s["audio"] = s_audio
+        t["video"] = t_video
+        t["audio"] = t_audio
+        data["sid"] = sid
+        data["s"] = s
+        data["t"] = t
+        console.log(data, "----")
+        $.ajax({
+            url: 'http://stat-api.xiongmaopeilian.com/classroom_stat/mark_media_issue/panda_product',
+            data: JSON.stringify(data),
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                // alert()
+            }
+        })
+        // $.post("http://stat-api.xiongmaopeilian.com/classroom_stat/mark_media_issue/panda_product", data, function (res) {
+
+        // })
+    })
+</script>
