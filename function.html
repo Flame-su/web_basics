@@ -14,18 +14,18 @@
 
 </html>
 <script>
-  // var m = '上';
-  // var foo = {
-  //   m: '下',
-  //   b:function() {
-  //     console.log(this, 1)
-  //     // return function () {
-  //     //   console.log(this, 2)
-  //     // }
-  //   }
-  // }
-  // foo.b();
-  // foo.b()();
+  var m = '上';
+  var foo = {
+    m: '下',
+    b:function() {
+      console.log(this.m, 1)
+      return function () {
+        console.log(this.m, 2)
+      }
+    }
+  }
+  foo.b();
+  foo.b()();
 
   // console.log(bar);
   // bar()
@@ -53,26 +53,62 @@
   // fn1()
   
   //把函数赋值之后再调用
-  var a = 1
-  var obj1 = {
-      a:2,
-      fn:function(){
-          console.log(this.a)
-      }
-  }
-  var fn1 = obj1.fn
-  fn1()//1
-  fn1.call(obj1)//2
+  // var a = 1
+  // var obj1 = {
+  //     a:2,
+  //     fn:function(){
+  //         console.log(this.a)
+  //     }
+  // }
+  // var fn1 = obj1.fn
+  // fn1()//1
+  // fn1.call(obj1)//2
 
-  var Person1  = function () {
-    this.name = 'Dot';
-}
-var Person2 = function () {
-    this.getname = function () {
-        console.log(this.name);
+  // var Person1  = function () {
+  //   this.name = 'Dot';
+  // }
+  // var Person2 = function () {
+  //   this.getname = function () {
+  //     console.log(this.name);
+  //   }
+  //   Person1.call(this);
+  //   console.log(this)
+  // }
+  // var person = new Person2();
+  // person.getname();       // Dot
+
+  // bind
+  // var obj = {
+  //   name: 'got'
+  // }
+
+  // function printName() {
+  //   console.log(this)
+  //     console.log(this.name)
+  // }
+  // console.log(printName())
+  // var dot = printName.bind(obj)
+  // console.log(dot) // function () { … }
+  // dot()  // Dot
+  
+  function Person(name,age){
+    // 这里的this都指向实例
+    this.name = name
+    this.age = age
+    console.log(this)
+    this.sayAge = function(){
+        console.log(this.age)
     }
-    Person1.call(this);
-}
-var person = new Person2();
-person.getname();       // Dot
+  }
+  function Female(){
+      console.log(this)
+      console.log(arguments)
+      Person.apply(this,arguments)//将父元素所有方法在这里执行一遍就继承了
+  }
+  // Female()
+  var dot = new Female('Dot',2)
+
+  var arr =[1,3,4,2,5]
+  Math.max.apply(null,arr)
+  console.log( Math.max.apply(null,arr))
 </script>
