@@ -11,17 +11,74 @@
 </body>
 </html>
 <script>
-  var a= 1
-  fn()
-  function fn(){
-    console.log(a)
-    var a = 2
+  // var a= 1
+  // fn()
+  // function fn(){
+  //   console.log(a)
+  //   var a = 2
+  // }
+  // console.log (a)
+  // var fn1 = function() {
+  //   console.log(a)
+  //   a = 3
+  // }
+  // fn1()
+  // console.log(a)
+
+  var o = {
+    a:10,
+    b:{
+        a:12,
+        fn:function(){
+            console.log(this); //undefined
+          }
+      }
   }
-  console.log (a)
-  var fn1 = function() {
-    console.log(a)
-    a = 3
+  o.b.fn();
+
+  var o = {
+    a:10,
+    b:{
+        a:12,
+        fn:function(){
+            console.log(this.a); //undefined
+            console.log(this); //window
+        }
+    }
   }
-  fn1()
-  console.log(a)
+  var j = o.b.fn;
+  // j();
+  // function Fn(){
+  //   this.user = "追梦子";
+  // }
+
+  // var b = new Fn();
+  // console.log(b.user); //追梦子
+
+  function fn2() {
+    this.user = "追梦子2";
+    console.log(this)
+  }
+  fn2()
+  console.log(this.user)
+
+  var a='li'
+  var i = {
+    a: 'wu',
+    b: {
+      a: 'su',
+      fn: function(){
+        return console.log(this.a)
+      }
+    },
+    fn1:function (){
+      console.log(this.a)
+      return function() {
+        console.log(this.a)
+      }
+    }
+  }
+  i.fn1()
+  i.fn1()()
+  i.b.fn()
 </script>

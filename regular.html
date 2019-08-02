@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="inp">
+  <input type="button" id="btu" value="匹配">
+</body>
+</html>
+<script>
+  var btu = document.querySelector('#btu');
+  btu.onclick = function(){
+      var t = document.querySelector('#inp').value;
+      var reg = /(\d{3})\d{3,6}(\d{4})/
+      // var reg = /\d\d\d/;
+      console.log(reg.test(t));//返回是否匹配成功的布尔值
+      console.log(reg.exec(t));//返回匹配后的结果，匹配失败返回null
+      //返回第一次出现符合的字符串的位置
+      console.log(t.search(reg));
+      //数组形式返回符合规则的字符串,使用g则返回全部匹配结果
+      console.log(t.match(reg));
+      //替换符合规则的字符串，使用g则全部替换
+      console.log(t.replace(reg,'$1***$2'));
+      //以规则为分割标志，分割整个字符串，以数组形式返回分割结果
+      // console.log(t.split(reg));
+      // 185****1234”,电话号码，正则实现中间四位为“*”
+  }
+  var str = 'gh2396666j998889';
+  // var str = '1221,3443';
+  // var str = '1zz1'
+// 1:子表达式匹配数组
+// 2:发生捕获行为，把子表达式匹配的结果放入缓存区
+// 3:使用反向引用获取缓存中的结果进行匹配
+// var reg = /(\d)(\z)\2\1/;
+var reg = /(\w)(\d)\2/;
+// console.log(str.match(reg));
+</script>
