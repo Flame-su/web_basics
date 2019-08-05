@@ -68,7 +68,10 @@
     b: {
       a: 'su',
       fn: function(){
-        return console.log(this.a)
+        console.log(this.a)
+        return function() {
+          console.log(this.a)
+        }
       }
     },
     fn1:function (){
@@ -78,7 +81,10 @@
       }
     }
   }
-  i.fn1()
-  i.fn1()()
-  i.b.fn()
+  // i.fn1()
+  // i.fn1()()
+  var sn = i.b.fn
+  sn()
+  // console.log(sn())
+  // i.b.fn()()
 </script>

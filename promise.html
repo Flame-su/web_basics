@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // function fn(){
+  //   console.log(1)
+  //   setTimeout(()=>{
+  //     console.log(2)
+  //   },1000)
+  //   setTimeout(()=>{
+  //     console.log(3)
+  //   },0)
+  //   console.log(4)
+  // }
+  // fn()
+
+  new Promise(resolve => {
+    console.log(1);
+    resolve(3);
+  }).then(num => {
+      console.log(num)
+  });
+  console.log(2)
+
+  console.log('one');
+  setTimeout(function() {
+    console.log('two');
+  }, 0);
+  Promise.resolve().then(function() {
+    console.log('three');
+  })
+  console.log('four');
+</script>
