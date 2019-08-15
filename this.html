@@ -30,7 +30,7 @@
     b:{
         a:12,
         fn:function(){
-            console.log(this); //undefined
+            console.log(this.a); //12
           }
       }
   }
@@ -55,12 +55,12 @@
   // var b = new Fn();
   // console.log(b.user); //追梦子
 
-  function fn2() {
-    this.user = "追梦子2";
-    console.log(this)
-  }
-  fn2()
-  console.log(this.user)
+  // function fn2() {
+  //   this.user = "追梦子2";
+  //   console.log(this)
+  // }
+  // fn2()
+  // console.log(this.user)
 
   var a='li'
   var i = {
