@@ -11,6 +11,8 @@
 </body>
 </html>
 <script>
+    //同步 执行栈  ／  异步 任务列队（微任务promise／宏任务 settimeut）
+    //先执行执行栈， 把任务列队里面执行完的记录一个事件，执行站运行完看任务列队是否有事件，进行执行 先执行微任务再执行宏任务 
   console.log(1)
   setTimeout(function(){
       console.log(2);
