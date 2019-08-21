@@ -23,20 +23,55 @@
   // }
   // fn()
 
-  new Promise(resolve => {
-    console.log(1);
-    resolve(3);
-  }).then(num => {
-      console.log(num)
-  });
-  console.log(2)
+  // new Promise(resolve => {
+  //   console.log(1);
+  //   resolve(3);
+  // }).then(num => {
+  //     console.log(num)
+  // });
+  // console.log(2)
 
-  console.log('one');
-  setTimeout(function() {
-    console.log('two');
-  }, 0);
-  Promise.resolve().then(function() {
-    console.log('three');
-  })
-  console.log('four');
+  // console.log('one');
+  // setTimeout(function() {
+  //   console.log('two');
+  // }, 0);
+  // Promise.resolve().then(function() {
+  //   console.log('three');
+  // })
+  // console.log('four');
+  // 执行顺序
+  // setTimeout(function () {
+  //   console.log(1);
+  // });
+
+  // new Promise(function (resolve,reject) {
+  //   console.log(2);
+  //   resolve(3);
+
+  // }).then(function (val) {
+  //   console.log(val);
+  // });
+  // console.log(4);
+  var promise = new Promise(function (resolve, reject) {
+    var a = 1
+    if (a == 1) {
+        resolve(a)
+    } else {
+        reject(error)
+    }
+})
+// .then 成功 ／ .catch 失败
+promise.then(function (value) {
+    console.log(value, 'then');
+    return value
+}).catch(function (error) {
+    console.log(error, 'error');
+}).then(function(value){
+  console.log(value)
+})
+// promise.all 传入一个［］全成功执行.then
+// promise.rase 传入一个 ［］ 有一个成功执行.then
+
+// promise.resolve(42) ==> new Promise (function(resolve){resolve(42)}).then(function(){})
+// promise.reject(42) ==> new Promise (function(reject){reject(42)}).catch(function(){})
 </script>
