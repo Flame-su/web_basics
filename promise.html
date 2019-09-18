@@ -63,7 +63,9 @@
 // .then 成功 ／ .catch 失败
 promise.then(function (value) {
     console.log(value, 'then');
-    return value
+    if(value == 2){
+      return value
+    }
 }).catch(function (error) {
     console.log(error, 'error');
 }).then(function(value){
