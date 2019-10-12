@@ -48,4 +48,13 @@
       // arr.push(output(i))
     }
     // Promise.all(arr).then(()=> console.log(5))
+
+    function fun(m){
+      for(let i=0;i<m;i++){
+        setTimeout(()=>{
+          console.log(m-i)
+        },1000*i)
+      }
+    }
+    fun(10)
 </script>

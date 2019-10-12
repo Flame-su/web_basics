@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  Array.prototype.distinct = function(){
+    console.log(this)
+  }
+var arra = [1,2,3,4,4,1,1,2,1,1,1];
+arra.map((i, n, m)=>{
+  // console.log(i, n, m)
+})
+arra.distinct();    //返回[3,4,2,1]
+
+var a = [1, 2, 3];
+var b = [4, 5, 6];
+Array.prototype.push.apply(a, b)
+console.log(a)
+// function concatArray(arr1,arr2){
+//   Array.prototype.push.apply(a, b);
+//   arr1 = unique1(arr1);
+//   return arr1;
+// }
+</script>

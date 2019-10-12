@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="one">
+    <div class="two">1</div>
+  </div>
+</body>
+</html>
+<script>
+  addEventListener
+  let one = document.getElementsByClassName('one')[0]
+  let two = document.getElementsByClassName('two')[0]
+  let body = document.getElementsByTagName('body')[0]
+  // one.onclick=function(){
+  //   alert(2)
+  // }
+  // two.onclick=function(){
+  //   alert(3)
+  // }
+  // body.onclick=function(){
+  //   alert(1)
+  // }
+  one.addEventListener('click',function(){
+    console.log('1')
+  },true)
+  two.addEventListener('click',function(){
+    console.log('2')
+  },true)
+  body.addEventListener('click',function(){
+    console.log('3')
+  },true)
+
+</script>

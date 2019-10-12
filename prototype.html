@@ -18,7 +18,9 @@
     var arr= [1,2,3,4,5,9]
     arr.map(a=>console.log(a))
   };
+  // constructor
   maxProfit()
+  console.log(maxProfit.prototype)
   function Person(name) {
     this.name = name;
     console.log(name)
@@ -30,9 +32,10 @@
   }
 
   var person1 = new Person('Byron');
+  // console.log(prototype.prototype)
   person1.one.push(1)
   var person2 = new Person('Frank');
   person1.one.push(2)
   person1.printName()
-  console.log(person1)
+  console.log(person1.one)
 </script>
