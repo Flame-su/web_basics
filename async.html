@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script>
+   alert(document.getElementById('one'))
+</script>
+<body>
+  <div id="one">
+    html执行顺序自上而下，先执行内部js文件，完后解析html，onload时间在页面所有内容加载完毕执行
+    async设置了（指引用外链），在内部script之后，从而异步加载页面其他内容，在onload之后
+    onload只能有一个，多个执行最后一个
+    
+  </div>
+<script src="async.js" async='async'></script>
+<script>
+  
+  alert(document.getElementById('one'))
+  window.onload = function(){
+    alert(3)
+  }
+  window.onload = function(){
+    alert(5)
+  }
+  
+</script>
+</body>
+</html>
