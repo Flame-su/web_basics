@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  function LazyMan(name) {
+    lp.taskList.push('Hi ' + name + '!');
+    return lp.exe();
+}
+
+var lp = LazyMan.prototype;
+
+lp.taskList = [];     
+
+lp.eat = function(v) {
+    lp.taskList.push('Eat ' + v + '!');
+    return lp.exe();
+}
+
+
+lp.sleep = function(t) {
+    lp.taskList.push('sleep ' + t);
+    return lp.exe();
+
+}
+
+lp.sleepFirst = function(t) {
+    lp.taskList.unshift('sleep ' + t);
+    return lp.exe();
+}
+
+lp.taskStart = false;
+
+lp.exe = function() {
+    var that = this;
+    if(!lp.taskStart) {
+        lp.taskStart = true;
+        setTimeout(function() {
+            doTask(lp.taskList);
+            that.taskList = [];
+        }, 0);
+    }
+    return lp;
+}
+
+
+function doTask(taskList) {
+    if(taskList.length) {
+        var task = taskList.shift();
+        if(task.indexOf('sleep') !== -1) {
+            var match = task.split(' ');
+            var t = parseInt(match[1]);
+            setTimeout(function(){
+                doTask(taskList);
+            }, t * 1000);
+        } else {
+            console.log(task);
+            doTask(taskList);
+        }
+    }
+}
+
+// LazyMan('Hank');
+// LazyMan('Hank').eat('dinner');
+// LazyMan('Hank').sleep(5).eat('dinner');
+LazyMan('Hank').sleepFirst(5).eat('dinner');
+</script>

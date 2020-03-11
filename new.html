@@ -12,12 +12,39 @@
 </html>
 <script>
 
+// function fn(){
+//   this.name = 'i`m teacher'
+//   this.sn  = function () {
+//     console.log(this.name)
+//   }
+// }
+// fn()
+// console.log(this)
+(function() { 
+  var m = 0; 
+  function getM() { 
+    console.log(m)
+    return m; 
+    } 
+  function seta(val) { m = val; } 
+  window.g = getM; 
+  window.f = seta; 
+})(); 
+// f(100);
+// console.log(g());
+
 function fn(){
-  this.name = 'i`m teacher'
-  this.sn  = function () {
-    console.log(this.name)
-  }
+   var arr = [];
+   for(var i = 0;i < 5;i ++){
+	 arr[i] = function(){
+    //  console.log(i)
+		 return i;
+	 }
+   }
+   return arr;
 }
-fn()
-console.log(this)
+var list = fn();
+for(var i = 0,len = list.length;i < len ; i ++){
+   console.log(list[i]());
+} 
 </script>

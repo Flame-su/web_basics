@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="description" content="This is my page">
+  <title>Document</title>
+  <script src="cache.js"></script>
+</head>
+<body>
+  <h1>111121</h1>
+  <img src="1.jpg" alt="">
+  <img src="1.jpg" alt="">
+</body>
+</html>
+<script>
+  const version = '2';
+ 
+//  self.addEventListener('install', event => {
+//    event.waitUntil(
+//      caches.open(`static-${version}`)
+//        .then(cache => cache.addAll([
+//          'cache.js'
+//        ]))
+//    );
+//  });
+  
+ self.addEventListener('fetch', event => {
+   event.respondWith(
+     caches.match(event.request)
+       .then(response => response || fetch(event.request))
+   );
+ });
+ self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(`static-${version}`)
+      .then(cache => cache.addAll([
+        new Request('cache.js', { cache: 'no-cache' })
+      ]))
+  );
+ })
+</script> 
+<script>
+  // plugin loader
+</script>
