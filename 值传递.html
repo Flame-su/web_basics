@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // console.log(1)
+  // async function async1(){
+  //   console.log(2)
+  //   await console.log(3)
+  //   console.log(4)
+  // }
+  // setTimeout (function(){
+  //   console.log(5)
+  // },0)
+  // async1()
+  // new Promise(function(resolve){
+  //   console.log(6)
+  //   resolve()
+  // }).then(function(){
+  //   console.log(7)
+  // })
+  // console.log(8)
+  // 1 2 3 6 8 4 7 5
+
+  // 值传递和引用传递
+  let objeat={a:0}
+  function fun(obj){
+    console.log(obj, '一')
+    obj.a=1
+    obj={a:2}
+    obj.b=2
+    console.log(obj, '二')
+  }
+  function fun() {
+    console.log(1)
+  }
+  fun(objeat)
+  console.log(objeat, '三')
+  // function fn() {
+  //   let a = 0
+  //   let  a = 1
+  //   console.log(a)
+  // }
+  // fn()
+  console.log('=================<')
+  var a=function(){
+    console.log(this)
+    this.b=3
+  }
+  // a.prototype.b= 7
+  c=new a()
+  // var b =9
+  // a()
+  // console.log(b)
+  // console.log(c.b)
+  console.log('=================<')
+  //而有一个容易引起误导的点在于下面这个变化
+  function setName(obj) {
+    obj.name = "Nicholas";
+    obj = new Object(); //改变obj的指向，此时obj指向一个新的内存地址，不再和person指向同一个
+    obj.name = "Greg";
+  }
+  var person = new Object();
+  setName(person);  
+  alert(person.name);  //
+</script> 

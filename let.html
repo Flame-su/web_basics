@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // 块级作用域 函数作用域，全局作用域，var不能跨函数作用域访问
+  // var i = 0
+  // function fn() {
+  //   console.log(2,i)
+  // }
+  // fn1=()=>{
+  //   var n = 0
+  //   // console.log(1,i)
+  // }
+  // fn1()
+  // console.log(i)
+  // console.log(n)
+
+  for (var i = 0; i < 10; i++) {    
+    // console.log(i);    
+  }    
+  console.log(i);  // 10  
+  if(true){
+    var j = 1
+  }
+  console.log(j)
+</script>
