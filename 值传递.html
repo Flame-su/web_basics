@@ -39,11 +39,9 @@
     obj.b=2
     console.log(obj, '二')
   }
-  function fun() {
-    console.log(1)
-  }
   fun(objeat)
   console.log(objeat, '三')
+  console.log('=================<')
   // function fn() {
   //   let a = 0
   //   let  a = 1
@@ -53,12 +51,16 @@
   console.log('=================<')
   var a=function(){
     console.log(this)
-    this.b=3
+    this.b={
+      a:1
+    }
   }
   // a.prototype.b= 7
   c=new a()
   // var b =9
-  // a()
+  h=a()
+  console.log(c)
+  console.log(h)
   // console.log(b)
   // console.log(c.b)
   console.log('=================<')
@@ -70,5 +72,6 @@
   }
   var person = new Object();
   setName(person);  
-  alert(person.name);  //
-</script> 
+  console.log(person.name);  //
+
+</script>

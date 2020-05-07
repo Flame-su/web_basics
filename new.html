@@ -11,40 +11,57 @@
 </body>
 </html>
 <script>
-
-// function fn(){
-//   this.name = 'i`m teacher'
-//   this.sn  = function () {
-//     console.log(this.name)
-//   }
-// }
-// fn()
-// console.log(this)
-(function() { 
-  var m = 0; 
-  function getM() { 
-    console.log(m)
-    return m; 
+  function Person(name,age){  
+    this.name=name;  
+    this.age=age;  
+    this.sayName=function(){  
+      alert(this.name);  
+    };  
+  }  
+    
+  // var person=new Person("张三",20); //此处为 构造对象，构造对象的话，返回的新对象是由解析器自己生成的。  
+  var person=Person("张三",20); //假设我在Person函数里面加了return "你好"; 这时的person就不会报undefined，而是一个字符串你好  
+  // person.sayName();//报错 person undefined 此处为普通函数调用，又没有给定返回值，出错。  
+    // console.log(person)
+  // //因为此时this指向window对象，  
+  window.sayName();//此时不会报错  
+    
+  // // 接下来就问，为什么我赋值给person，可以用window来引用呢？  
+  // // 因为如果不用new就相当于普通函数调用，而 Person()根本没有返回值，  
+  // // 所以Person根本就没赋值给person，此时的person只是一个undefined，  
+  // // 但是Person却执行了一次，成为了window的对象，this指向了window，所以window可以直接使用Person的方法，  
+    
+  // Person("张三",20);  
+  // person.sayName();  
+  function Test()  
+  {  
+      this.name = "test";  
+      return "那么";  
+  }  
+  var test1 = new Test();   //Object 对象，它有一个name 属性，并且返回一个字符串test  
+  var test2 = Test(); // 函数Test()属于Function对象   这个test2，它单纯是一个字符串  
+  console.log(test1)
+  console.log(test2)
+//如果函数返回值为常规意义上的数值类型（Number、String、Boolean）时，new函数将会返回一个该函数的实例对象，
+// 而如果函数返回一个引用类型（Object、Array、Function）时，则new函数与直接调用函数产生的结果相同。
+    
+</script>
+<script>
+    function Person(name,age) 
+    { 
+        var o = new Object(); 
+        o.name = name; 
+        o.age = age; 
+        o.getName = function() 
+        { 
+            alert(this.name); 
+        } 
+        return o;
     } 
-  function seta(val) { m = val; } 
-  window.g = getM; 
-  window.f = seta; 
-})(); 
-// f(100);
-// console.log(g());
-
-function fn(){
-   var arr = [];
-   for(var i = 0;i < 5;i ++){
-	 arr[i] = function(){
-    //  console.log(i)
-		 return i;
-	 }
-   }
-   return arr;
-}
-var list = fn();
-for(var i = 0,len = list.length;i < len ; i ++){
-   console.log(list[i]());
-} 
+    var obj1 = new Person("liwen",25); 
+    var obj2 = Person("liwen1",25); 
+    console.log(obj1)
+    console.log(obj2)
+    // obj1.getName();  //liwen*/        new一个函数的实例对象  
+    // obj2.getName();  //liwen1*/      直接调用  
 </script>

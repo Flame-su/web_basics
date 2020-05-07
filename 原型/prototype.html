@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  function Person() {
+    console.log(this)
+  }
+  var person = new Person();
+  person.name = 'Kevin';
+  console.log(Person.prototype.constructor) 
+  console.log('==============')
+  function setName(obj) {
+    obj.name = "Nicholas";
+    obj = new Object(); //改变obj的指向，此时obj指向一个新的内存地址，不再和person指向同一个
+    obj.name = "Greg";
+    console.log(obj.name)
+  }
+  var person = new Object();
+  setName(person);  
+  console.log(person.name);  //"Nicholas"
+  console.log('==============')
+  let arr = new Object()
+  console.log(arr)
+  console.log('=================?')
+  function People(){
+    this.type='人'
+  }
+  People.prototype.showType=function(){
+    　alert(this.type);
+  }
+  function Woman(){
+      this.sex='女';
+      this.age=34;
+      this.type= '女人'
+  }
+  Woman.prototype=new People();
+  var w=new Woman();
+  w.showType()
+  console.log(Woman.prototype === w.__proto__)
+  console.log('大家好,我的种类是:'+w.type+",我的年龄是:"+w.age+",我的性别是:"+w.sex);
+  console.log(w)
+</script>
