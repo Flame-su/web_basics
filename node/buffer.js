@@ -1,2 +1,2 @@
-const buf2 = Buffer.alloc(10, 1);
+const buf2 = Buffer.from('tést');
 console.log(buf2)
