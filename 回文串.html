@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <a href="https://blog.csdn.net/DLGDark/article/details/78235607" target="_blank" rel="noopener noreferrer">js实现找出字符串中的最长回文串</a>
+    <!-- https://blog.csdn.net/DLGDark/article/details/78235607 -->
+</body>
+</html>
+
+<script>
+  // 逻辑，arr记录最长的字符串，brr记录当前循环出来的字符串合适了负值arr，两次循环的作用是，得到字符串中顺序不同的排列，然后用＋＝到brr，根据反转字符串和负值长度判断时候是最长的
+  function fn(res){
+    let arr = ''
+    let brr = ''
+    for (let i=0 ; i<res.length;i++){
+      brr=''
+      for (let j=i ;j<res.length;j++){
+        // brr+=res.charAt(j)
+        brr+=res[j]
+        console.log(brr,i,j)
+        if(se(brr)&&brr.length>arr.length){
+          arr = brr
+        }
+      }
+      // console.log(brr)
+      // if()
+    }
+    return arr
+  }
+  function se(s) {
+    // console.log(s)
+    let rev = s.split('').reverse().join('')
+    return rev===s
+  }
+  console.log(fn('ddabbade'))
+</script>
