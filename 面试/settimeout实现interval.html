@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <a href="">用setTimeout实现setInterval</a>
+</body>
+</html>
+<script>
+  (() => {
+    const list = new Set();
+    function myInterval(fn, ms) {
+    const ref = {};
+    const exec = () => {
+      return setTimeout(() => {
+        fn.apply(null);
+        const timer = exec();
+        ref.current = timer;
+      }, ms);
+    };
+    ref.current = exec();
+    list.add(ref);
+    return ref;
+    }
+    
+    function myClearInterval(ref) {
+      clearTimeout(ref.current);
+      list.delete(ref);
+    }
+    window.myInterval = myInterval;
+    window.myClearInterval = myClearInterval;
+  })();
+</script>

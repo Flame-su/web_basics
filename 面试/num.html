@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <a href="https://blog.csdn.net/qq_40608516/article/details/90721120">输入几个数字，然后输出这些数字中所有只出现过一次的数字</a>
+    <!-- 输入几个数字，然后输出这些数字中所有只出现过一次的数字 -->
+</body>
+</html>
+<script>
+  //方法一
+  //利用indexof和lastindexof下标相同，判断是否是唯一出现
+  function fn(res) {
+    let arr = []
+
+    console.log(res)
+    for(let i = 0 ;i<res.length ; i++){
+      // console.log( res.indexOf(res[i]),res[i],res.lastIndexOf(res[i]))
+      if(res.indexOf(res[i])===res.lastIndexOf(res[i])){
+        arr.push(res[i])
+      }
+    }
+    return arr
+  }
+  console.log(fn('1231231237'))
+  //方法二
+  // 利用key value的方式，遍历所有数据，每一个第一次出现的数据记录下来，下一个在出现进行i＋＋；判断所有value等于1的输出
+  function FindNumsAppearOnce2(array) {
+    // alert(array)
+    const map = {},
+    res = [];
+    for (let i = 0; i < array.length; i++) {
+      console.log(map[array[i]])
+      if (!map[array[i]]) {
+        map[array[i]] = 1;
+      } else {
+        map[array[i]]++;
+      }
+    }
+    for (let i = 0; i < array.length; i++) {
+      if (map[array[i]] === 1) {
+        res.push(array[i]);
+      }
+    }
+    return res;
+  }
+  console.log(FindNumsAppearOnce2('231231424912621241'))
+</script>

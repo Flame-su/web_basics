@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html">面相对象</a>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  function Cat(name, color){ //对象
+    this.name = name;
+    this.color = color
+  }
+  cat1 = new Cat('喵喵', '橙色') // cat1是实例对象  Cat是构造函数 
+  // 每个原型（对象）都有constructor属性指向构造函数
+  // 每个函数都有prototype指向实例原型（原型对象）
+  // consturctor
+  cat2 = new Cat('喵老大', '黑色')
+  Cat.prototype.eat = function() {
+    alert('吃鱼')
+  }
+  console.log(cat1)
+  console.log(cat2)
+  console.log(cat1.constructor === Cat)
+  console.log(cat1 instanceof Cat)
+  console.log(cat1.__proto__)
+  console.log(cat1.__proto__  === Cat.prototype)
+  console.log(Cat.prototype.constructor)
+  console.log(cat1.__proto__.constructor)
+  console.log(cat1.constructor)
+</script>

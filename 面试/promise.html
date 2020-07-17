@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  let promise = new Promise(function(resolve, reject) {
+        console.log(1);
+        resolve()
+        window.promise2()
+  }).then(function(){
+      console.log(2)
+  }).then(function(){
+      console.log(3)
+  });
+  let promise2 = new Promise(function(resolve, reject) {
+        console.log(5);
+        resolve()
+  }).then(function(){
+      console.log(6)
+  }).then(function(){
+      console.log(7)
+  });
+  console.log(4)
+</script>
