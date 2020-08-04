@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    #one{
-      width: 100px;
-      height: 100px;
-      background: pink;
+    div {
+      width: 150px;
+      height: 200px;
+      background-color: #fffcf1;
+      box-shadow: 0px 20px 0px 0px #ffe463;
+      float: left;
+      margin-left: 20px;
+      border-radius: 30px;
+      font-size: 32px;
+      line-height: 200px;
+      text-align: center
     }
   </style>
 </head>
+
 <body>
-  <div id="one"></div>
+  <div id="one">麻</div>
+  <div if='two'>将</div>
 </body>
+
 </html>
 <script>
+  // 防抖:每次点击开启定时器，在定时器结束时候执行代码，在执行过程中，如再次点击则，清空定时器重新开启
   let one = document.getElementById('one')
   // one.onmousemove = count
-  one.onmousemove= debounce(count,100,true);
-  function count () {
-    console.log(1)
+  one.onmousemove = debounce(count, 100, true);
+  function count() {
+    console.log('www')
   }
-  function debounce(func,wait,immediate) {
+  function debounce(func, wait, immediate) {
     let timeout;
     return function () {
       let context = this;
@@ -34,15 +46,32 @@
       if (immediate) {
         var callNow = !timeout;
         timeout = setTimeout(() => {
-            timeout = null;
+          timeout = null;
         }, wait)
         if (callNow) func.apply(context, args)
       }
       else {
-        timeout = setTimeout(function(){
-            func.apply(context, args)
+        timeout = setTimeout(function () {
+          func.apply(context, args)
         }, wait);
       }
     }
-}
+  }
+  let two = document.getElementById('two')
+  one.onmousemove = throttle(fn);
+  function fn() {
+    console.log('http')
+  }
+  function throttle(func, wait) {
+    let previous = 0;
+    return function () {
+      let now = Date.now();
+      let context = this;
+      let args = arguments;
+      if (now - previous > wait) {
+        func.apply(context, args);
+        previous = now;
+      }
+    }
+  }
 </script>
