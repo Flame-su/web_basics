@@ -11,10 +11,12 @@
 </body>
 </html>
 <script>
-
-let arr1=[1,2,3,4,5,6]
-let arr2=[4,5,6,7,8,9]
-// 并集 数组去重 
-let RemoveSame=new Set(arr1)
-console.log(RemoveSame) //[1, 2, 3, 4,
+let arr = [1,23,6,2,[4,2,3,6,2],[2,5,7,4,3,1],23,4,1]
+// 1. arr+'' 去层级到字符串
+// 2. split(',')字符串转数组
+// 3. new Set 去冲转对象
+// 4. array.form转数组
+// 5. .map(a=>+a) 字符串转数字
+// 6. sort排序
+console.log(Array.from(new Set((arr+'').split(','))).map(a=>+a).sort((a,b)=>a-b))
 </script>
