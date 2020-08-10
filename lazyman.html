@@ -41,7 +41,7 @@
     console.log(6)
     var param = {},
     args = Array.prototype.slice.call(arguments);
-    console.log(arguments)
+    console.log(args)
 
 		if(args.length < 1){
 			throw new Error("subscribe 参数不能为空!");
@@ -60,7 +60,7 @@
 
 	// 发布
 	function publish(){
-    console.log(5)
+    console.log(5, taskList)
 		if(taskList.length > 0){
 			run(taskList.shift());
 		}
@@ -70,7 +70,7 @@
 	function run(option){
 		var msg = option.msg,
 			args = option.args;
-    console.log(msg,1)
+    console.log(option,1)
 		switch(msg){
 			case "lazyMan": lazyMan.apply(null, args);break;
 			case "eat": eat.apply(null, args);break;
@@ -84,7 +84,7 @@
 	function lazyMan(str){
     console.log(4)
 		lazyManLog("Hi!This is "+ str +"!");
-
+		console.log(taskList)
 		publish();
 	}
 
@@ -126,5 +126,5 @@
 		return new LazyMan();
 	};
 })(window);
-LazyMan('s')
+LazyMan('s').eat('sss')
 </script>

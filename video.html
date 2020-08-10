@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <a href='https://www.mhbofang.com/?url=https://3.mhbobo.com/20191028/mAeeJhAQ/index.m3u8' download="https://www.mhbofang.com/?url=https://3.mhbobo.com/20191028/mAeeJhAQ/index.m3u8">下载</a>
+  </div>
+</body>
+</html>
+<script>
+  // 日志函数
+function log() {
+    // dom中创建a标签
+  // js使用a标签实现文件下载功能
+    let aTag = document.createElement('a')
+    // 日志展示的内容
+    let content = '这里是日志内容...'
+
+    // blob是js内置对象，用来处理二进制文件流
+    let blob = new Blob([content])
+
+    // 给创建的a标签添加download属性，此属性是让我们的浏览器下载URL而不是跳转到URL所指向的内容
+    aTag.download = 'https://www.mhbofang.com/?url=https://3.mhbobo.com/20191028/mAeeJhAQ/index.m3u8'
+
+    // 给创建的a标签添加href属性并赋值
+    aTag.href = URL.createObjectURL(blob)
+
+    // 自动点击创建的标签
+    aTag.click()
+
+    // 不再使用时需释放createObjectURL创建得对象
+    URL.revokeObjectURL(blob)
+}
+
+// 执行日志函数
+log()
+
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // 1 sort
+  let arr = [1,2,34,2,3,1]
+  console.log(Array.from(new Set(arr)))
+  // 2
+  function quchong(arrs){
+    let brr = []
+    for (let i=0;i<arrs.length;i++){
+      if(brr.indexOf(arrs[i])===-1){
+        brr.push(arrs[i])
+      }
+    }
+    console.log(brr)
+  }
+  quchong(arr)
+  // 3
+  function quchong1(arr) {
+    let arrs= arr.sort()
+    let brr = [arrs[0]]
+    for (let i=0;i<arrs.length;i++){
+      if(arrs[i]!==arrs[i+1]){
+        brr.push(arrs[i+1])
+      }
+    }
+    console.log(brr)
+  }
+  // includes
+  quchong1(arr)
+</script>
