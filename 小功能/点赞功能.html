@@ -6,15 +6,59 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    body,html{
+      padding: 0;
+      margin: 0;
+    }
     .hand{
       position: fixed;
       right: 50px;
-      top: 200px;
-      /* animation: handRock 5s infinite */
+      top: 270px;
+      transform: rotate(20deg);
+    /* translate:10px */
+    /* transform:translateX(20px); */
+      animation: handRock 1s .15s linear 2
     }
     @keyframes handRock{
-     from {right: 10px;}
-     to {right: 50px}
+     0% { transform: rotate(30deg)}
+     25% { transform: rotate(0deg)}
+     50% {transform: rotate(-10deg)}
+     75% {transform: rotate(0deg)}
+     100% { transform: rotate(30deg)}
+    }
+    canvas {
+      display: block;
+      position: fixed;
+      right: 50px;
+      top: 120px;
+      z-index: -20;
+      cursor: pointer;
+    }
+    .feiji{
+      width: 200px;
+      height:150px;
+      position: fixed;
+      top: 400px;
+      left:50%;
+      padding: 0;
+      margin: 0;
+      transform: translate(-50%,0);
+      animation: feifei 4s linear infinite
+    }
+    @keyframes feifei{
+      0% {left: 50%;z-index: 1;}
+      20% {left:50%;z-index: 1;}
+      40% {left:-20%;z-index: -1;}
+      45% {left:130%;z-index: -1;}
+      60% {left:50%;z-index: 1;}
+      100% {left:50%;z-index: 1;}
+    }
+    .box{
+      position: fixed;
+    width: 100%;
+    top: 400px;
+    height: 100%;
+    background: #fff;
     }
   </style>
 </head>
@@ -22,9 +66,66 @@
   
 </style>
 <body>
-  <img class="hand" src="./daily/hand.png" alt="">
+  <img class="hand" src="./daily/hand.png" class="journal-reward" alt="" id="one">
+  <div class="box">
+  </div>
+  <img src="./daily/feiji.gif" class="feiji" alt="" id="feiji">
 </body>
 </html>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>  -->
+<script src="./zan.js"></script>
 <script>
+  document.getElementById('feiji').animate({left:0})
+  let assets = [
+  './daily/hand.png'
+]
+assets.forEach(function(src, index) {
+	assets[index] = new Promise(function(resolve) {
+		var img = new Image;
+		img.onload = resolve.bind(null, img);
+		img.src = src;
+	});
+});
 
+Promise.all(assets).then(function(images) {
+
+	var random = {
+		uniform: function(min, max) {
+			return min + (max - min) * Math.random();
+		},
+		uniformDiscrete: function(i, j) {
+			return i + Math.floor((j - i + 1) * random.uniform(0, 1));
+		},
+	};
+
+	var stage = new BubbleHearts();
+	var canvas = stage.canvas;
+	canvas.width = 170;
+	canvas.height = 300;
+	canvas.style['width'] = '70px';
+	canvas.style['height'] = '150px';
+	document.body.appendChild(canvas);
+	//journal-reward 涓鸿祻妗冪殑鎸夐挳 
+	document.getElementById('one').addEventListener('click', function() {
+		//闅忔満椋樺姩
+		stage.bubble(images[random.uniformDiscrete(0, images.length - 1)]);
+
+		//鍨傜洿鍚戜笂椋樺姩鏁堟灉
+		//	let image = images[random.uniformDiscrete(0, images.length - 1)];
+		//	stage.bubble(image, 3000, function(lifespan) {
+		//		if(lifespan >= 0) {
+		//			stage.context.drawImage(
+		//				image,
+		//				(canvas.width - image.width) / 2,
+		//				(canvas.height - image.height) * lifespan,
+		//				image.width,
+		//				image.height
+		//			);
+		//		} else {
+		//			return true;
+		//		}
+		//	});
+	}, false);
+
+});
 </script>
