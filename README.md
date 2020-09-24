@@ -54,3 +54,17 @@ https://www.cnblogs.com/zareb/p/5699571.html
 
 Js 里面没有类（ES6以前class）的语法，所以类的概念就通过创造一个对象来实现。
 `new过以后 实例都是对象，而对象不全是实例。`
+
+## arguments
+arguments对象是所有（非箭头）函数中都可用的局部变量。
+
+arguments并不是数组，只是相像而已，除了长度，没有数组的方法，
+所以用
+ Array.prototype.slice.call(arguments，num)
+args = [].slice.call(arguments)
+...arguments
+ Array.from(arguments)
+### 转换成数组
+在严格模式下，剩余参数、默认参数和解构赋值参数的存在不会改变 arguments对象的行为
+在非严格模式下，不包含剩余参数、默认参数和解构赋值参数，值会被更改
+
