@@ -35,7 +35,7 @@
     this.type='人'
   }
   People.prototype.showType=function(){
-    　alert(this.type);
+    // 　alert(this.type);
   }
   function Woman(){
       this.sex='女';
@@ -50,4 +50,13 @@
   console.log(w)
   console.log(w.__proto__)
   console.log(Object.prototype.__proto__)
+  function FN(){
+
+  }
+  FN.prototype.a = 1
+  fn1 = new FN
+  fn2 = new FN
+  fn1.a=2
+  console.log(fn1)
+  console.log(fn2)
 </script>

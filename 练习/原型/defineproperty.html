@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="text">
+
+  </div>
+</body>
+</html>
+<script>
+  let obj = {}
+  function watch(obj, name, callback) {
+      let value = obj.name
+      Object.defineProperty(obj, name, {
+          set(msg) {
+              // 触发setter给obj赋值
+              console.log(value)
+              value = msg
+              // alert()
+                  //执行劫持后的操作
+              // callback(value)
+          },
+          get() {
+              //返回获取属性值
+              return value
+          }
+      })
+  }
+  function doSomething(value) {
+      document.querySelector('div').innerHTML = value
+      document.querySelector('input').value = value
+  }
+  document.querySelector('input').addEventListener('input', (e) => {
+      obj['msg'] = e.target.value
+  })
+
+  watch(obj, 'msg', doSomething)
+
+    // console.log(obj)
+  // let obj = {
+  //   a:1
+  // }
+  // Object.defineProperty(obj,'name',{
+  //   get(name){
+  //     console.log('get')
+  //     return name
+  //   },
+  //   set(name){
+  //     console.log('set')
+  //     return name
+  //   }
+  // })
+  // obj.c=3
+  // obj.prototype.c=3
+  // console.log(obj.name=3, obj)
+  
+  // let obj = {
+  //           a: 1
+  //       }
+
+  //       let newValue = 45
+  //       Object.defineProperty(obj, 'b', {
+  //           get(value) {
+  //               console.log('获取')
+  //               return value
+  //           },
+  //           set(value) {
+  //               console.log('设置')
+  //               // value = newValue
+  //               return value
+  //           }
+  //       })
+  //       obj.b = 6 //设置
+
+  //       obj.b //获取
+  //       console.log(obj)
+
+
+  // vue 原理
+
+var data = {name: 'kindeng'};
+observe(data);
+data.name = 'dmq'; // 哈哈哈，监听到值变化了 kindeng --> dmq
+ 
+function observe(data) {
+    if (!data || typeof data !== 'object') {
+        return;
+    }
+    // console.log(Object.keys(data))
+    // 取出所有属性遍历
+    Object.keys(data).forEach(function(key) {
+      console.log(data,key)
+        defineReactive(data, key, data[key]);
+    });
+};
+ 
+function defineReactive(data, key, val) {
+    observe(val); // 监听子属性
+    Object.defineProperty(data, key, {
+        enumerable: true, // 可枚举
+        configurable: false, // 不能再define
+        get: function() {
+            return val;
+        },
+        set: function(ss) {
+            console.log('哈哈哈，监听到值变化了 ', val, ' --> ', ss);
+            val = ss;
+        }
+    });
+  }
+  console.log(data)
+</script>

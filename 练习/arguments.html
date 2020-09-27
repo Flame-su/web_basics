@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  function side(arr) {
+  arr[0] = arr[2];
+}
+function a(a, b, c = 3) {
+  c = 10;
+  side(arguments);
+  console.log(arguments[2], ...arguments)
+  console.log(a , b , c)
+  return a + b + c;
+}
+// a(1, 1, 1);
+console.log(a(1, 1, 1))
+</script>
+<script>
+  function myConcat(separator) {
+    var args = Array.prototype.slice.call(arguments);
+    console.log(args)
+    return args.join(separator);
+  }
+  myConcat(", ", "red", "orange", "blue");
+</script>

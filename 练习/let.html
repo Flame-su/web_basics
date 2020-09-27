@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  
+
 </body>
+
 </html>
 <script>
   // 块级作用域 函数作用域，全局作用域，var不能跨函数作用域访问
@@ -24,12 +27,31 @@
   // console.log(i)
   // console.log(n)
 
-  for (var i = 0; i < 10; i++) {    
+  for (var i = 0; i < 10; i++) {
     // console.log(i);    
-  }    
+  }
   console.log(i);  // 10  
-  if(true){
+  if (true) {
     var j = 1
   }
   console.log(j)
+  async function async1() {
+    console.log('async1 start')
+    await async2(); console.log('async1 end')
+  }
+  async function async2() {
+    console.log('async2')
+  }
+  console.log('script start')
+  setTimeout(function () {
+    console.log('setTimeout')
+  }, 0)
+  async1()
+  new Promise(function (resolve) {
+    console.log('promise1')
+    resolve()
+  }).then(function () {
+    console.log('promise2')
+  })
+  console.log('script end')
 </script>

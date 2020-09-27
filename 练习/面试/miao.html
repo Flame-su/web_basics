@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  div{
+    height: 100px;
+    width: 100px;
+    background: gray
+  }
+</style>
+<body>
+  <div id="fd">
+    1
+  </div>
+</body>
+
+</html>
+<script>
+  Object.assign
+  const data = [{
+    id: 1,
+    title: "课程 1", 
+    children: [
+      { id: 4, title: "课程 1-1" }, {
+        id: 5,
+        title: "课程 1-2", children: [
+          { id: 6, title: "课程 1-2-1" },
+          { id: 7, title: "课程 1-2-2" },],
+      },],
+  },
+  { id: 2, title: "课程 2" }, 
+  { id: 3, title: "课程 3" },
+  ];
+  // console.log(...data)
+  // console.log(handle(data))
+  // console.log(data.flat())
+  let data2 = JSON.parse(JSON.stringify(data))
+  handle(data2)
+  function handle(rs){
+    rs.map((item)=>{
+      if(item.children){
+        item.children.map((i)=>{
+          // console.log(i)
+          rs.push(i)
+        })
+        // for(let i of item.children){
+        //   console.log(i)
+        //   rs.push(i)
+        // }
+        delete item['children']
+        handle(rs)
+        // return console.log(rs)
+      }
+    })
+  }
+  console.log(data)
+  console.log(data2)
+  // console.log(data.flatMap(e => e))
+  document.getElementById('fd')
+  fd.onmousemove = fdfn(fn,1000)
+  // fd.onmousemove = fn
+  function fn() {
+    console.log(1)
+  }
+  function fdfn(func, wait){
+    let timer;
+    return function () {
+      // console.log(this)
+      let that = this
+      let args = arguments
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(function () {
+          func.apply(that, args)
+        }, wait);
+    }
+  }
+  const a = {};
+const b = { key: "b" };
+const c = { key: "c" };
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a[b], a[c]);
+  // console.log(this,that)
+</script>
